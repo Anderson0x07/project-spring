@@ -6,38 +6,35 @@
 package com.bodyhealth.domain;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
  *
  * @author Anderson
  */
-@Data
 @Entity
-@Table(name="persona")
-public class Persona implements Serializable  {
+@Data
+@Table(name = "usuario")
+public class Usuario implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPersona;
+    private Long id_usuario;
     
     @NotEmpty
-    private String nombre;
+    private String username;
     
     @NotEmpty
-    private String apellido;
+    private String password;
     
-    @NotEmpty
-    @Email
-    private String email;
-    private String telefono;
+    @OneToMany
+    @JoinColumn(name="id_usuario")
+    private List<Rol> roles;
     
-    @NotNull
-    private Double saldo;
 }

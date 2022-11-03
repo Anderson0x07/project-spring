@@ -4,36 +4,23 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
         <title>Inicio</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"></header>
-        <a th:href="@{/agregar}">Crear Persona</a>
-        <div th:if="${personas != null and !personas.empty}">
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                <tr th:each="persona : ${personas}">
-                    <td th:text="${persona.nombre}"></td>
-                    <td th:text="${persona.apellido}"></td>
-                    <td th:text="${persona.email}"></td>
-                    <td th:text="${persona.telefono}"></td>
-                    <td> <a th:href="@{/editar/} + ${persona.idPersona}" th:text="Editar"/></td>
-                    <td> <a th:href="@{/eliminar(idPersona=${persona.idPersona})}" th:text="Eliminar"/></td>
-                </tr>
-            </table>
-        </div>
+        
+        <section th:replace="layout/botonesAgregar :: botonesAgregar"></section>
+        
+        <section th:replace="layout/agregarClientes :: agregarClientes"></section>
+        
+        <section th:replace="layout/listadoClientes :: listadoClientes"></section>
         
         <footer th:replace="layout/plantilla :: footer"></footer>
+        
+        
     </body>
 </html>
