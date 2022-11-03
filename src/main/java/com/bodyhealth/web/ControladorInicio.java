@@ -7,6 +7,7 @@ package com.bodyhealth.web;
 
 import com.bodyhealth.domain.Persona;
 import com.bodyhealth.servicio.PersonaService;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,14 @@ public class ControladorInicio {
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
         
-        var personas = personaService.listarPersonas();
+        List<Persona> personas = personaService.listarPersonas();
         
         log.info("Ejecuntando el controller rest");
         log.info("usuario login: "+user);
         model.addAttribute("personas",personas);
         
-        var saldoTotal=0D;
-        for (var p:personas) {
+        double saldoTotal=0;
+        for (Persona p:personas) {
             saldoTotal+= p.getSaldo();
         }
         
